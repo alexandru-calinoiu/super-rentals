@@ -1,8 +1,15 @@
+import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
+
+let stubMapService = Service.extend({
+  getMapElement() {
+      document.createElement('div');
+  }
+})
 
 module('Integration | Component | rental-listing', function (hooks) {
   setupRenderingTest(hooks);
@@ -16,6 +23,7 @@ module('Integration | Component | rental-listing', function (hooks) {
       city: 'test-city',
       bedrooms: 3
     });
+    this.owner.register('service:maps', stubMapService);
   });
 
   test('should render rental details', async function (assert) {
