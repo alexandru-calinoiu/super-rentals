@@ -50,5 +50,11 @@ module('Acceptance | list rentals', function (hooks) {
   });
 
   test('should link to rental information', async function (assert) {
+    await visit('/rentals');
+    await click('.grand-old-mansion');
+
+    assert.equal(currentURL(), '/rentals/grand-old-mansion');
+    assert.ok(this.element.querySelector('.show-listing h2').textContent.trim().includes('Grand Old Mansion'));
+    assert.ok(this.element.querySelector('.show-listing .description'));
   });
 });

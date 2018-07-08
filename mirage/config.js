@@ -38,7 +38,7 @@ export default function () {
 
   this.get('/rentals', function (db, request) {
     if (request.queryParams.city !== undefined) {
-      let filteredRentals = rentals.filter(function(rental) {
+      let filteredRentals = rentals.filter(function (rental) {
         return rental.attributes.city.toLowerCase().indexOf(request.queryParams.city.toLowerCase()) !== -1
       })
       return { data: filteredRentals };
@@ -46,5 +46,9 @@ export default function () {
     else {
       return { data: rentals }
     }
+  });
+
+  this.get('/rentals/:id', function (db, request) {
+    return { data: rentals.find((rental) => rental.id == request.params.id) }
   });
 }
